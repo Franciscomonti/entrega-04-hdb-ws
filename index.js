@@ -1,16 +1,22 @@
 const express = require('express');
-const app = express();
+const { engine } =  require('express-handlebars');
 
 const routerProduct = require('./app/routes/product.js');
 const routerCart = require('./app/routes/cart.js');
 
+const app = express();
+const PORT = 8080;
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.engine('handlebars', engine());
+app.set('views', __dirname + 'views'); //ojo!!
+app.set('view engine', 'handlebars');
 
 app.use('/api/products', routerProduct);
 app.use('/api/carts', routerCart);
 
-const PORT = 8080;
 
 const server =app.listen(PORT, () => {
     console.log(`corriendo en el servidor http://localhost:${PORT}`)
