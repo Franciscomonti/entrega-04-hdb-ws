@@ -29,7 +29,7 @@ module.exports = {
     getAllProducts: (req, res) =>{
         persistance
             .getAll()
-            .then(data => res.status(200).json({'All prodcuts' : data}))
+            .then(data => res.status(200).render('products', { data }))
             .catch(err => res.status(500).json({error: err.message}))
     },
 

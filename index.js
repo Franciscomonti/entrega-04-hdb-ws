@@ -11,8 +11,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.engine('handlebars', engine());
-app.set('views', __dirname + 'views'); //ojo!!
+app.set('views', __dirname + '/views'); //ojo!!
 app.set('view engine', 'handlebars');
+app.use(express.static(__dirname + "/public"));
 
 app.use('/api/products', routerProduct);
 app.use('/api/carts', routerCart);
